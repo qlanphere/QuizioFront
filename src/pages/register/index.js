@@ -1,10 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useAuthContext } from "../../contexts/auth";
-import { Wisdom } from '../../contexts'
 
 const Register = () => {
     const { register, login } = useAuthContext();
-    const wisdom = useContext(Wisdom)
 
     const [ formData, setFormData ] = useState({
         username: "",
@@ -25,7 +23,7 @@ const Register = () => {
             setLoading(true)
             await register(formData)
             await login(formData)
-            history.push('/feed')
+            //history.push('/feed')
         } catch (err) {
             setLoading(false)
             setError(err)
@@ -43,7 +41,6 @@ const Register = () => {
         </form>
         { error && <div id="error">{error}</div> }
         { loading && <div id="loading">Creating account . . .</div> }
-        <div>{wisdom}</div>
         </>
     );
     
