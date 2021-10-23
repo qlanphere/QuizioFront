@@ -16,6 +16,9 @@ function App() {
           <Route exact path="/register">
             <Pages.Register />
           </Route>
+          <Route exact path="/room">
+            <Pages.CreateRoom />
+          </Route>
 
         </Switch>
       </Router>
