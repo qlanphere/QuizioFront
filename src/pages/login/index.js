@@ -18,7 +18,7 @@ const Login = () => {
         try {
             setLoading(true)
             await login(formData)
-            history.push('/feed')
+            history.push('/room')
         } catch (err) {
             setLoading(false)
             setError(err)
