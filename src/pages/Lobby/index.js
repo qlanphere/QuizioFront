@@ -1,7 +1,12 @@
 import React, {useState, useEffect} from 'react'
+import { useAuthContext } from '../../contexts/auth'
+import { useGameContext } from '../../contexts/gameContext' 
 
 
 const Lobby = () =>{
+
+
+    const {host, roomName, players} = useGameContext()
 
     return (
         <div id="Lobby">
