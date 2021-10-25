@@ -1,12 +1,14 @@
 import {
   BrowserRouter as Router,
-  Link, Route, Switch
+  Link, Route, Switch, useParams
 } from 'react-router-dom';
-import {Login, CreateRoom, Register} from './pages';
+import {Login, CreateRoom, Register, Lobby, GameSettings} from './pages';
 import { GameProvider } from './contexts/gameContext';
 import './App.css';
 
 function App() {
+
+  const room = useParams()
   return (
     <div className="App">
       <Router>
@@ -21,6 +23,13 @@ function App() {
           <Route exact path="/room">
             <CreateRoom />
           </Route>
+          <Route exact path="/lobby/:room">
+            <Lobby />
+          </Route>
+          <Route exact path="/settings/:room">
+            < GameSettings/>
+          </Route>
+         
 
         </Switch>
         </GameProvider>

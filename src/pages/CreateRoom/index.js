@@ -1,29 +1,41 @@
 import React, {useState, useContext} from 'react'
 import { useAuthContext } from '../../contexts/auth'
 import { useGameContext } from '../../contexts/gameContext' 
+import { useHistory, useParams } from 'react-router-dom';
+
+
 const CreateRoom = () => {
 
- //const { currentUser } = useContext(useAuthContext)
+ const { currentUser } = useAuthContext()
  
- // ?? currentUser - should be from localStorage or from Auth ??
+ const history = useHistory();
     
-    const {setHost, roomName, setRoomName, players, setPlayers} = useGameContext()
+    const {host, setHost, roomName, setRoomName, players, setPlayers} = useGameContext()
 
 function updateRoomName(e) {
     let newInput = e.target.value;
     setRoomName(newInput)
+    
 }
 
 function submitNewRoom(e) {
     e.preventDefault()
    console.log('room name ', roomName)
-  // setHost(currentUser) 
+   console.log(currentUser.name)
+   console.log("host name1", host)
+   setHost(currentUser.name)
+   setPlayers([...players, currentUser.name])  
+   console.log("room ", roomName, ". host is " , host) 
+   history.push(`/settings/${roomName}`)
 }
 
 function joinRoom(e) {
     e.preventDefault()
     
-// setPlayers([..players, currentUser])  
+    setPlayers([...players, currentUser.name])  
+    console.log("players ", players)
+    history.push(`/lobby/${roomName}`)
+    
 
 }
     return (
@@ -34,7 +46,7 @@ function joinRoom(e) {
             <h3>Enter Room Name: <span><input type = "text" onChange={updateRoomName}></input></span></h3>
             <span>
                 <button onClick={submitNewRoom}  >New Room</button>
-                <button onClock={joinRoom}>Join</button></span>
+                <button onClick={joinRoom}>Join</button></span>
         </div>
     )
 }
