@@ -3,12 +3,14 @@ import {
   Link, Route, Switch
 } from 'react-router-dom';
 import {Login, CreateRoom, Register} from './pages';
+import { GameProvider } from './contexts/gameContext';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Router>
+        <GameProvider>
         <Switch>
           <Route exact path="/login">
             <Login />
@@ -21,6 +23,7 @@ function App() {
           </Route>
 
         </Switch>
+        </GameProvider>
       </Router>
     </div>
   );
