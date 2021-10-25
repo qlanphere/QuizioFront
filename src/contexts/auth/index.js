@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
+const host = 'http://localhost:3000'
+const cors = require('cors')
 
 const AuthContext = React.createContext();
 
@@ -22,9 +24,11 @@ export const AuthProvider = ({ children }) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const options = {
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*"},
+                    mode: 'cors'
                 }
-                const { data } = await axios.post(`${process.env.API_URL}/auth/register`, userData, options)
+                const { data } = await axios.post(`${host}/auth/register`, userData, options)
                 if (data.err){
                     throw Error(data.err)
                 }
@@ -40,9 +44,11 @@ export const AuthProvider = ({ children }) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const options = {
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*"},
+                    mode: 'cors'
                 }
-                const { data } = await axios.post(`${process.env.API_URL}/auth/login`, userData, options)
+                const { data } = await axios.post(`${host}/auth/login`, userData, options)
                 if (!data.success) { 
                     throw new Error('Login not authorised');
                 }

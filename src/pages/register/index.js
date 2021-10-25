@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { useAuthContext } from "../../contexts/auth";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
     const { register, login } = useAuthContext();
+    const history = useHistory();
 
     const [ formData, setFormData ] = useState({
         username: "",
@@ -23,7 +25,7 @@ const Register = () => {
             setLoading(true)
             await register(formData)
             await login(formData)
-            //history.push('/feed')
+            history.push('/room')
         } catch (err) {
             setLoading(false)
             setError(err)
