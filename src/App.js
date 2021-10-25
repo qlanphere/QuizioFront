@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Link, Route, Switch
 } from 'react-router-dom';
-import * as Pages from './pages';
+import {Login, CreateRoom, Register} from './pages';
 import './App.css';
 
 function App() {
@@ -11,13 +11,13 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/login">
-            <Pages.Login />
+            <Login />
           </Route>
           <Route exact path="/register">
-            <Pages.Register />
+            <Register />
           </Route>
           <Route exact path="/room">
-            <Pages.CreateRoom />
+            <CreateRoom />
           </Route>
 
         </Switch>
