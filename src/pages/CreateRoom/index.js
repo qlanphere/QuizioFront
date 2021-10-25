@@ -1,7 +1,13 @@
 import React, {useState, useContext} from 'react'
 import { useAuthContext } from '../../contexts/auth'
-import { useGameContext } from '../../contexts/gameContext' 
+import { useGameContext } from '../../contexts/gameContext'
+import {io} from 'socket.io-client' 
 const CreateRoom = () => {
+    const socket = io('http://localhost:8080')
+
+    socket.on("connection", () => {
+        console.log(`user is connected on ${socket.id}`)
+    })
 
  //const { currentUser } = useContext(useAuthContext)
  
