@@ -20,9 +20,6 @@ function updateRoomName(e) {
 
 function submitNewRoom(e) {
     e.preventDefault()
-   console.log('room name ', roomName)
-   console.log(currentUser.name)
-   console.log("host name1", host)
    setHost(currentUser.name)
    setPlayers([...players, currentUser.name])  
    console.log("room ", roomName, ". host is " , host) 
@@ -33,7 +30,6 @@ function joinRoom(e) {
     e.preventDefault()
     
     setPlayers([...players, currentUser.name])  
-    console.log("players ", players)
     history.push(`/lobby/${roomName}`)
     
 

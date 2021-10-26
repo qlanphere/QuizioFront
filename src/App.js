@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Link, Route, Switch, useParams
 } from 'react-router-dom';
-import {Login, CreateRoom, Register, Lobby, GameSettings} from './pages';
+import {Login, CreateRoom, Register, Lobby, GameSettings, QuizInProgress, EndGame} from './pages';
 import { GameProvider } from './contexts/gameContext';
 import './App.css';
 
@@ -28,6 +28,12 @@ function App() {
           </Route>
           <Route exact path="/settings/:room">
             < GameSettings/>
+          </Route>
+          <Route exact path="/game/:room">
+            < QuizInProgress/>
+          </Route>
+          <Route exact path="/finish/:room">
+            < EndGame/>
           </Route>
          
 
