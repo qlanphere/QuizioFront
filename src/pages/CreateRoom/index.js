@@ -15,9 +15,6 @@ const {setHost, roomName, setRoomName, players, setPlayers, message, setMessage}
 const history = useHistory();
 const socket = useContext(SocketContext)
 
-    socket.on('connect', () => {
-    console.log(socket.id)
-    })
 
 function handleJoin () {
     if (create) {
@@ -38,7 +35,8 @@ function joinRoom(e) { //would be better to create settings before creating room
     let room = e.target[0].value
     setRoomName(room)
     //setMessage(`${currentUser.name} has joined room: ${room}`)
-    socket.emit('join-room', roomName, `${currentUser.name} has joined room: ${room}`)
+    socket.emit('join-room', room, `${currentUser.name} has joined room: ${room}`)
+    
     join ? history.push(`/lobby/${room}`): history.push(`/settings/${room}`)
     
 // setPlayers([..players, currentUser])  
