@@ -5,6 +5,7 @@ import {
 import {Login, CreateRoom, Register, Lobby, GameSettings, QuizInProgress, EndGame} from './pages';
 import { GameProvider } from './contexts/gameContext';
 import './App.css';
+import Liderboard from './components/Leaderboard';
 
 function App() {
 
@@ -34,6 +35,9 @@ function App() {
           </Route>
           <Route exact path="/finish/:room">
             < EndGame/>
+          </Route>
+          <Route exact path="/liderboard">
+            < Liderboard/>
           </Route>
          
 
