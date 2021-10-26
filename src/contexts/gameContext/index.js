@@ -11,11 +11,12 @@ export function GameProvider({ children }){
   const [gameSettings, setGameSettings] = useState({numberOfQuestions:5, level:"easy", topic:""});
   const [roomName, setRoomName]=useState("");
   const [questions, setQuestions]=useState([]);
+  const [message, setMessage] = useState('')
 
 
 
 return (
-    <GameContext.Provider value={{roomName, host, players, gameSettings, questions, setRoomName, setHost, setPlayers, setGameSettings, setQuestions}}>
+    <GameContext.Provider value={{roomName, host, players, gameSettings, questions,message, setRoomName, setHost, setPlayers, setGameSettings, setQuestions, setMessage}}>
         { children }
     </GameContext.Provider>
 )

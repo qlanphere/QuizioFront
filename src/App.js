@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import {Login, CreateRoom, Register, Lobby, GameSettings, QuizInProgress, EndGame} from './pages';
 import { GameProvider } from './contexts/gameContext';
+
 import './App.css';
 
 function App() {
