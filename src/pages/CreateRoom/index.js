@@ -11,6 +11,7 @@ const CreateRoom = () => {
     
 const {currentUser} = useAuthContext()
 const {setHost, roomName, setRoomName, players, setPlayers} = useGameContext()
+const history = useHistory();
 
 const [message, setMessage] = useState('')
 const centerStyle = {
@@ -40,8 +41,6 @@ function handleCreate () {
             console.log(`${user} has joined room: ${room}`)
             setMessage(`${user} has joined room: ${roomName}`)
         })
-
-
 
 function joinRoom(e) {
     e.preventDefault()
