@@ -22,11 +22,11 @@ const CreateRoom = () => {
 
     
 
- //const { currentUser } = useContext(useAuthContext)
+ const { currentUser } = useAuthContext()
  
- // ?? currentUser - should be from localStorage or from Auth ??
+ const history = useHistory();
     
-    const {setHost, roomName, setRoomName, players, setPlayers} = useGameContext()
+    const {host, setHost, roomName, setRoomName, players, setPlayers} = useGameContext()
 
 // function updateRoomName(e) {
 //     e.preventDefault()

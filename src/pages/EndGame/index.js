@@ -4,7 +4,7 @@ const EndGame = () => {
 
 
     return (
-<div></div>
+<div>Game over!</div>
 
     )
 }
