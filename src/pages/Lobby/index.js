@@ -13,6 +13,7 @@ const Lobby = () => {
     
     const { currentUser } = useAuthContext()
     const { host, roomName, players} = useGameContext()
+    const [numberOfGuests, setNumberOfGuests] = useState(0)
     const history = useHistory();
     const socket = useContext(SocketContext)
 
@@ -21,15 +22,23 @@ const Lobby = () => {
     //     socket.emit('join', currentUser.name);  //  where 'user' is your object containing email.
     // })
 
-    socket.on('joined', (str) => {
+
+    socket.on('joined', (str, number) => {
          console.log(`my id is ${socket.id}`)
         // console.log(`${user} has joined room: ${room}`)
         displayMessage(str)
+        setNumberOfGuests(number)
+        
     })
+
+    socket.on("userLeft", (guests) => {
+        console.log(guests)
+        setNumberOfGuests(guests)
+      });
 
     function displayMessage(str) {
         const div = document.getElementById('messages')
-        div.textContent = str //use ref
+        div.textContent = str
     }
    
     function handleStartGame(e){
@@ -55,7 +64,9 @@ const Lobby = () => {
             <h2>Host is  {host} </h2>
             <h3>Players: {players}</h3>
             <h4> Waiting for players to join..</h4>
+            <div>There are {numberOfGuests} Guests in Lobby</div>
             <div id = "messages"style = {centerStyle}></div>
+            
 
      
           { (host === currentUser.name) ?
