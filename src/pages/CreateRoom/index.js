@@ -35,7 +35,7 @@ function joinRoom(e) { //would be better to create settings before creating room
     let room = e.target[0].value
     setRoomName(room)
     //setMessage(`${currentUser.name} has joined room: ${room}`)
-    socket.emit('join-room', room, `${currentUser.name} has joined room: ${room}`)
+    socket.emit('join-room', room, `${currentUser.name} has joined room: ${room}`, currentUser.email)
     
     join ? history.push(`/lobby/${room}`): history.push(`/settings/${room}`)
     

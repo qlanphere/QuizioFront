@@ -14,7 +14,6 @@ const QuizInProgress = () => {
   // const { socket } = useContext(SocketContext)
   const [index, setIndex] = useState(0)
   const history = useHistory();
-  console.log(socket)
   
   
   function handleNextQuestion() {
@@ -58,7 +57,7 @@ const QuizInProgress = () => {
       <span></span>
 
 
-      {(index == (questions.length - 1)) ? <button onClick={handleFinish}>Finish</button> :
+      {(index === (questions.length - 1)) ? <button onClick={handleFinish}>Finish</button> :
         <button onClick={handleNextQuestion}>Next</button>}
     </div>
   )
