@@ -18,7 +18,7 @@ const NavigationBar = () => {
                         <Nav.Link href="/">Home</Nav.Link>
                         {!currentUser && <Nav.Link href="/register">Register</Nav.Link>}
                         {!currentUser && <Nav.Link href="/login">Login</Nav.Link>}
-                        {currentUser && <Nav.Link href="/home" onClick={logout}>Logout</Nav.Link>}
+                        {currentUser && <Nav.Link href="/" onClick={logout}>Logout</Nav.Link>}
                     </Nav>
                 </Container>
             </Navbar>
