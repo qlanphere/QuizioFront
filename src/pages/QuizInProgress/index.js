@@ -15,7 +15,6 @@ const QuizInProgress = () => {
   const [index, setIndex] = useState(0)
   const history = useHistory();
   const [chosenAnswer,setChosenAnswer]=useState()
-  const [score, setScore]=useState(0)
   const [gameStarted, setGameStarted] = useState(false)
   let options
 
@@ -34,13 +33,9 @@ const QuizInProgress = () => {
     
       socket.on('next-question', () => {
         console.log(index, questions.length)
-        if (index < questions.length-1) {
         handleNextQuestion()
         socket.emit('question-load', roomName)
-        } else {
-          console.log('game done')
-          handleFinish()
-        }
+    
     
       })
     
@@ -48,11 +43,21 @@ const QuizInProgress = () => {
 
 
   function handleNextQuestion() {
-    if(chosenAnswer === decodeURIComponent(questions[index].correct_answer)){
+    if(chosenAnswer === decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
+      setScore(prev => prev + 10)
+      setIndex(prev => prev + 1)
+      console.log(`User's score is ${score}`)
+    } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
+      setIndex(prev => prev + 1)
+      console.log(`User's score is ${score}`)
+    } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index === questions.length -1) {
+      console.log(`User's score is ${score}`)
+      history.push(`/finish/${roomName}`)
+    } else {
       setScore(prev => prev + 10)
       console.log(`User's score is ${score}`)
+      history.push(`/finish/${roomName}`)
     }
-    setIndex(prev => prev + 1)
   }
 
   // ------  handling choice  
@@ -73,11 +78,6 @@ const QuizInProgress = () => {
 
       <p key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</p>
     </div>)
-  }
-  // ------------
-
-  function handleFinish() {
-    history.push(`/finish/${roomName}`)
   }
 
   return (
