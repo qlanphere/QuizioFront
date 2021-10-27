@@ -23,7 +23,7 @@ const QuizInProgress = () => {
     socket.off('next-question')
     socket.off('question-load')
     socket.off('timer')
-    handleFinish()
+    history.push(`/finish/${roomName}`)
   }
 
   useEffect(() => {
