@@ -6,8 +6,8 @@ import { SocketContext } from '../../contexts/socketContext';
 
 const GameSettings = () =>{
 
-const {host, setHost, roomName, gameSettings, setGameSettings, setQuestions} = useGameContext()
-const {currentUser} = useAuthContext()
+const {host, roomName, gameSettings, setGameSettings, questions, setQuestions, setHost} = useGameContext()
+const {currentUser} = useAuthContext();
 const socket = useContext(SocketContext)
 const history = useHistory();
 
@@ -16,6 +16,21 @@ const history = useHistory();
 // const numberOfQuestions=4
 // const level="medium"
 // -----
+
+
+//  to shuffle the  answers array
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
 
 const trivia_categories = [{"id":9,"name":"General Knowledge"},{"id":10,"name":"Entertainment: Books"},
 {"id":11,"name":"Entertainment: Film"},{"id":12,"name":"Entertainment: Music"},
@@ -34,6 +49,7 @@ async function fetchQuiz(numberOfQuestions, level, topic) {
       
       `https://opentdb.com/api.php?amount=${numberOfQuestions}&category=${topic}&difficulty=${level}&type=multiple&encode=url3986`)
       const questions = await result.json();
+      questions.results.map(question => question.allOptions = shuffle([...question.incorrect_answers,question.correct_answer]))
       console.log("questions " ,questions.results)
       setQuestions(questions.results) 
       
