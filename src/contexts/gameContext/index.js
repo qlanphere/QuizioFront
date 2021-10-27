@@ -2,18 +2,19 @@ import React, { useState, useContext } from 'react';
 
 const GameContext = React.createContext();
 
-export function GameProvider({ children }){
-    const [host, setHost]=useState("");
+export function GameProvider({ children }) {
+    const [host, setHost] = useState("");
     const [players, setPlayers] = useState([]);
-    const [gameSettings, setGameSettings] = useState({numberOfQuestions:5, level:"easy", topic:""});
-    const [roomName, setRoomName]=useState("");
-    const [questions, setQuestions]=useState([]);
+    const [gameSettings, setGameSettings] = useState({ numberOfQuestions: 5, level: "easy", topic: "" });
+    const [roomName, setRoomName] = useState("");
+    const [questions, setQuestions] = useState([]);
     const [message, setMessage] = useState('')
+    const [emails, setEmails] = useState([])
     
     
     
     return (
-        <GameContext.Provider value={{roomName, host, players, gameSettings, questions,message, setRoomName, setHost, setPlayers, setGameSettings, setQuestions, setMessage}}>
+        <GameContext.Provider value={{roomName, host, players, gameSettings, questions, message, emails, setRoomName, setHost, setPlayers, setGameSettings, setQuestions, setMessage, setEmails}}>
         { children }
     </GameContext.Provider>
 )
