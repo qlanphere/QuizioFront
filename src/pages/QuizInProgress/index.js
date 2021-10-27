@@ -8,8 +8,7 @@ import { Answers } from '../../components';
 import './quiz.css'
 
 const QuizInProgress = () => {
-  // only want to start timer when a question loads
-  socket.emit('question-load')
+ 
 
   const { host, roomName, gameSettings, setGameSettings, questions, setQuestions } = useGameContext()
   // const { socket } = useContext(SocketContext)
@@ -17,8 +16,32 @@ const QuizInProgress = () => {
   const history = useHistory();
   const [chosenAnswer,setChosenAnswer]=useState()
   const [score, setScore]=useState(0)
+  const [gameStarted, setGameStarted] = useState(false)
 
-  console.log(socket)
+
+   
+
+  useEffect(() => {
+    if (!gameStarted) {
+      socket.emit('question-load', roomName)
+      setGameStarted(true)
+    }
+
+      socket.on('timer', (count) => {
+        console.log(count)
+      })
+    
+      socket.on('next-question', () => {
+        if (index < questions.length-1) {
+        handleNextQuestion()
+        socket.emit('question-load', roomName)
+        } else {
+          console.log('game done')
+        }
+    
+      })
+    
+  }, []);
 
 
   function handleNextQuestion() {
@@ -42,28 +65,6 @@ const QuizInProgress = () => {
     </div>)
   // ------------
 
-  socket.on('timer', (count) => {
-    setInterval(() => {
-      if (count > 0) {
-        count -= 1000 // decrease by 1s
-        console.log(count)
-      } else if (!count) {
-        handleNextQuestion()
-        socket.emit('reset')
-      } else {
-        return
-      }
-    }, 1000)
-    // while (count > 0) {
-    //   setInterval(() => {
-    //     count -= 1000 // decrease by 1s
-    //     console.log(count)
-    //   }, 1000)
-    // }
-    // count hits 0 reset + move on
-  });
-  // on timer, if it hits zero move onto next question and emit reset timer
-
   function handleFinish() {
     history.push(`/finish/${roomName}`)
   }
@@ -86,8 +87,8 @@ const QuizInProgress = () => {
       <span></span>
 
 
-      {(index === (questions.length - 1)) ? <button onClick={handleFinish}>Finish</button> :
-        <button onClick={handleNextQuestion}>Next</button>}
+      {/* {(index === (questions.length - 1)) ? <button onClick={handleFinish}>Finish</button> :
+        <button onClick={handleNextQuestion}>Next</button>} */}
     </div>
   )
 }
