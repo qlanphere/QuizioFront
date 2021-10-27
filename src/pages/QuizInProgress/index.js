@@ -17,6 +17,7 @@ const QuizInProgress = () => {
   const [chosenAnswer,setChosenAnswer]=useState()
   const [score, setScore]=useState(0)
   const [gameStarted, setGameStarted] = useState(false)
+  let options
 
 
    
@@ -32,11 +33,13 @@ const QuizInProgress = () => {
       })
     
       socket.on('next-question', () => {
+        console.log(index, questions.length)
         if (index < questions.length-1) {
         handleNextQuestion()
         socket.emit('question-load', roomName)
         } else {
           console.log('game done')
+          handleFinish()
         }
     
       })
@@ -49,20 +52,20 @@ const QuizInProgress = () => {
     console.log(score)
     console.log(chosenAnswer)
     setIndex(prev => prev + 1)
-
-
   }
 
   // ------  handling choice  
   function handleChoice(event) {
     setChosenAnswer(event.target.innerText)
   }
-  const options = questions[index].allOptions.map((answ, i) =>
+  if (index < questions.length) {
+  options = questions[index].allOptions.map((answ, i) =>
     // <button key={i} onClick={handleAnswer } >{decodeURIComponent(answ)}</button>)
     <div>
 
       <card key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</card>
     </div>)
+  }
   // ------------
 
   function handleFinish() {
@@ -73,7 +76,7 @@ const QuizInProgress = () => {
     <div  >
 
       <h2> Quiz in progress</h2>
-      <Question index={index} />
+      {(index<questions.length-1) ? <Question index={index} />: <></>}
 
       <div>
 
