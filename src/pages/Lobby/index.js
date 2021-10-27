@@ -26,7 +26,7 @@ const Lobby = () => {
     socket.on('joined', (str, number) => {
          console.log(`my id is ${socket.id}`)
         // console.log(`${user} has joined room: ${room}`)
-        displayMessage(str)
+        if (str) {displayMessage(str)}
         setNumberOfGuests(number)
         
     })

@@ -6,7 +6,8 @@ import { SocketContext } from '../../contexts/socketContext';
 
 const GameSettings = () =>{
 
-const {host, roomName, gameSettings, setGameSettings, questions, setQuestions} = useGameContext()
+const {host, roomName, gameSettings, setGameSettings, questions, setQuestions, setHost} = useGameContext()
+const {currentUser} = useAuthContext();
 const socket = useContext(SocketContext)
 const history = useHistory();
 
@@ -50,6 +51,7 @@ async function fetchQuiz(numberOfQuestions, level, topic) {
     let difficulty = e.target[2].value
 
     setGameSettings({topic: topic[0].id, numberOfQuestions: numberOfQuestions, level: difficulty})
+    setHost(currentUser.name)
 
     fetchQuiz(numberOfQuestions, difficulty, topic[0].id)
 
