@@ -6,12 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth";
 import { SocketContext, socket } from './contexts/socketContext'
+import { GameProvider } from './contexts/gameContext';
 
 ReactDOM.render(
   <Router>
     <AuthProvider>
       <SocketContext.Provider value={socket}>
-        <App />
+        <GameProvider>
+          <App />
+        </GameProvider>
       </SocketContext.Provider>
     </AuthProvider>
   </Router>,

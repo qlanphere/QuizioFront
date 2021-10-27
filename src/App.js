@@ -2,19 +2,19 @@ import {
   BrowserRouter as Router,
   Link, Route, Switch, useParams
 } from 'react-router-dom';
-import {Login, CreateRoom, Register, Lobby, GameSettings, QuizInProgress, EndGame} from './pages';
-import { GameProvider } from './contexts/gameContext';
-
+import { Login, CreateRoom, Register, Lobby, GameSettings, QuizInProgress, EndGame } from './pages';
+import { Nav, Navbar, Container } from 'react-bootstrap';
 import './App.css';
 import Liderboard from './components/Leaderboard';
-
+import NavigationBar from './components/NavBar/NavigationBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   const room = useParams()
   return (
     <div className="App">
       <Router>
-        <GameProvider>
+        <NavigationBar/>
         <Switch>
           <Route exact path="/login">
             <Login />
@@ -29,21 +29,18 @@ function App() {
             <Lobby />
           </Route>
           <Route exact path="/settings/:room">
-            < GameSettings/>
+            < GameSettings />
           </Route>
           <Route exact path="/game/:room">
-            < QuizInProgress/>
+            < QuizInProgress />
           </Route>
           <Route exact path="/finish/:room">
-            < EndGame/>
+            < EndGame />
           </Route>
           <Route exact path="/liderboard">
-            < Liderboard/>
+            < Liderboard />
           </Route>
-         
-
         </Switch>
-        </GameProvider>
       </Router>
     </div>
   );
