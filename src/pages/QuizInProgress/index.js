@@ -10,12 +10,11 @@ import './quiz.css'
 const QuizInProgress = () => {
  
 
-  const { host, roomName, gameSettings, setGameSettings, questions, setQuestions, index, setIndex } = useGameContext()
+  const { host, roomName, gameSettings, setGameSettings, questions, setQuestions, score, setScore, index, setIndex} = useGameContext()
   // const { socket } = useContext(SocketContext)
 
   const history = useHistory();
   const [chosenAnswer,setChosenAnswer]=useState()
-  const [score, setScore]=useState(0)
   const [gameStarted, setGameStarted] = useState(false)
   let options
    
@@ -39,42 +38,49 @@ const QuizInProgress = () => {
     
       socket.on('next-question', () => {
         // console.log(index, questions.length)
-        if (index < questions.length-1) {
         handleNextQuestion()
         socket.emit('question-load')
-        } else {
-          console.log('game done')
-          handleFinish()
-        }
-    
       })
     
   }, []);
 
 
   function handleNextQuestion() {
-    setScore(score + (chosenAnswer === decodeURIComponent(questions[index].correct_answer)))
-    // console.log(score)
-    // console.log(chosenAnswer)
-    setIndex(prev => prev + 1)
+    if(chosenAnswer === decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
+      setScore(prev => prev + 10)
+      setIndex(prev => prev + 1)
+      console.log(`User's score is ${score}`)
+    } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
+      setIndex(prev => prev + 1)
+      console.log(`User's score is ${score}`)
+    } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index === questions.length -1) {
+      console.log(`User's score is ${score}`)
+      history.push(`/finish/${roomName}`)
+    } else {
+      setScore(prev => prev + 10)
+      console.log(`User's score is ${score}`)
+      history.push(`/finish/${roomName}`)
+    }
   }
 
   // ------  handling choice  
   function handleChoice(event) {
-    setChosenAnswer(event.target.innerText)
+    let choice;
+    choice = event.target.innerText
+    setChosenAnswer(choice)
+    console.log(choice)
+    if(choice === decodeURIComponent(questions[index].correct_answer)){
+      console.log(questions[index].correct_answer)
+      console.log('you are correct')
+    }
   }
   if (index < questions.length) {
   options = questions[index].allOptions.map((answ, i) =>
     // <button key={i} onClick={handleAnswer } >{decodeURIComponent(answ)}</button>)
     <div>
 
-      <card key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</card>
+      <p key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</p>
     </div>)
-  }
-  // ------------
-
-  function handleFinish() {
-    history.push(`/finish/${roomName}`)
   }
 
   return (
