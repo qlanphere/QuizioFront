@@ -8,16 +8,43 @@ import { Answers } from '../../components';
 import './quiz.css'
 
 const QuizInProgress = () => {
-  // only want to start timer when a question loads
-  socket.emit('question-load')
+ 
 
   const { host, roomName, gameSettings, setGameSettings, questions, setQuestions, score, setScore} = useGameContext()
   // const { socket } = useContext(SocketContext)
   const [index, setIndex] = useState(0)
   const history = useHistory();
   const [chosenAnswer,setChosenAnswer]=useState()
+  const [score, setScore]=useState(0)
+  const [gameStarted, setGameStarted] = useState(false)
+  let options
 
-  console.log(socket)
+
+   
+
+  useEffect(() => {
+    if (!gameStarted) {
+      socket.emit('question-load', roomName)
+      setGameStarted(true)
+    }
+
+      socket.on('timer', (count) => {
+        console.log(count)
+      })
+    
+      socket.on('next-question', () => {
+        console.log(index, questions.length)
+        if (index < questions.length-1) {
+        handleNextQuestion()
+        socket.emit('question-load', roomName)
+        } else {
+          console.log('game done')
+          handleFinish()
+        }
+    
+      })
+    
+  }, []);
 
 
   function handleNextQuestion() {
@@ -39,13 +66,16 @@ const QuizInProgress = () => {
       console.log('you are correct')
     }
   }
-  const options = questions[index].allOptions.map((answ, i) =>
+  if (index < questions.length) {
+  options = questions[index].allOptions.map((answ, i) =>
     // <button key={i} onClick={handleAnswer } >{decodeURIComponent(answ)}</button>)
     <div>
 
       <p key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</p>
     </div>)
- 
+  }
+  // ------------
+
   function handleFinish() {
     history.push(`/finish/${roomName}`)
   }
@@ -54,7 +84,7 @@ const QuizInProgress = () => {
     <div  >
 
       <h2> Quiz in progress</h2>
-      <Question index={index} />
+      {(index<questions.length-1) ? <Question index={index} />: <></>}
 
       <div>
 
@@ -68,8 +98,8 @@ const QuizInProgress = () => {
       <span></span>
 
 
-      {(index === (questions.length - 1)) ? <button onClick={handleFinish}>Finish</button> :
-        <button onClick={handleNextQuestion}>Next</button>}
+      {/* {(index === (questions.length - 1)) ? <button onClick={handleFinish}>Finish</button> :
+        <button onClick={handleNextQuestion}>Next</button>} */}
     </div>
   )
 }
