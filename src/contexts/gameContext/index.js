@@ -10,11 +10,12 @@ export function GameProvider({ children }) {
     const [questions, setQuestions] = useState([]);
     const [message, setMessage] = useState('')
     const [emails, setEmails] = useState([])
+    const [index, setIndex] = useState(0)
     
     
     
     return (
-        <GameContext.Provider value={{roomName, host, players, gameSettings, questions, message, emails, setRoomName, setHost, setPlayers, setGameSettings, setQuestions, setMessage, setEmails}}>
+        <GameContext.Provider value={{roomName, index, host, players, gameSettings, questions, message, emails, setRoomName, setIndex, setHost, setPlayers, setGameSettings, setQuestions, setMessage, setEmails}}>
         { children }
     </GameContext.Provider>
 )

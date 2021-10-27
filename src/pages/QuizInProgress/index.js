@@ -10,21 +10,26 @@ import './quiz.css'
 const QuizInProgress = () => {
  
 
-  const { host, roomName, gameSettings, setGameSettings, questions, setQuestions } = useGameContext()
+  const { host, roomName, gameSettings, setGameSettings, questions, setQuestions, index, setIndex } = useGameContext()
   // const { socket } = useContext(SocketContext)
-  const [index, setIndex] = useState(0)
+
   const history = useHistory();
   const [chosenAnswer,setChosenAnswer]=useState()
   const [score, setScore]=useState(0)
   const [gameStarted, setGameStarted] = useState(false)
   let options
-
-
    
+
+  if (index == questions.length) {
+    socket.off('next-question')
+    socket.off('question-load')
+    socket.off('timer')
+    handleFinish()
+  }
 
   useEffect(() => {
     if (!gameStarted) {
-      socket.emit('question-load', roomName)
+      socket.emit('question-load')
       setGameStarted(true)
     }
 
@@ -33,10 +38,10 @@ const QuizInProgress = () => {
       })
     
       socket.on('next-question', () => {
-        console.log(index, questions.length)
+        // console.log(index, questions.length)
         if (index < questions.length-1) {
         handleNextQuestion()
-        socket.emit('question-load', roomName)
+        socket.emit('question-load')
         } else {
           console.log('game done')
           handleFinish()
@@ -49,8 +54,8 @@ const QuizInProgress = () => {
 
   function handleNextQuestion() {
     setScore(score + (chosenAnswer === decodeURIComponent(questions[index].correct_answer)))
-    console.log(score)
-    console.log(chosenAnswer)
+    // console.log(score)
+    // console.log(chosenAnswer)
     setIndex(prev => prev + 1)
   }
 
@@ -76,7 +81,7 @@ const QuizInProgress = () => {
     <div  >
 
       <h2> Quiz in progress</h2>
-      {(index<questions.length-1) ? <Question index={index} />: <></>}
+      {(index<questions.length) ? <Question index={index} />: <></>}
 
       <div>
 
