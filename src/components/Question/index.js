@@ -6,6 +6,7 @@ import { useGameContext } from '../../contexts/gameContext'
 const Question = (props) => {
 
     const { questions} = useGameContext()
+    console.log(questions)
   
   
     const questionArrayLength = questions.length;

@@ -52,11 +52,11 @@ async function fetchQuiz(numberOfQuestions, level, topic) {
 
     setGameSettings({topic: topic[0].id, numberOfQuestions: numberOfQuestions, level: difficulty})
     setHost(currentUser.name)
-
     fetchQuiz(numberOfQuestions, difficulty, topic[0].id)
 
     history.push(`/lobby/${roomName}`)
   }
+
 
 return (
     <div id="settings">
