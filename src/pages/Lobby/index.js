@@ -27,9 +27,17 @@ const Lobby = () => {
          console.log(`my id is ${socket.id}`)
         // console.log(`${user} has joined room: ${room}`)
         if (str) {displayMessage(str)}
+        console.log(email)
+        
         setNumberOfGuests(number)  
+        
+        socket.emit('send-emails', roomName, currentUser.email)
+        
+        // setEmails(Array.from(new Set(emails)))
+    })
+
+    socket.on('emails', (email) => {
         setEmails(prev => [...prev, email])
-        setEmails(Array.from(new Set(emails)))
     })
 
     socket.on("userLeft", (guests) => {

@@ -11,7 +11,7 @@ import './quiz.css'
 const QuizInProgress = () => {
  
 
-  const { host, roomName, gameSettings, setGameSettings, questions, setQuestions, score, setScore, index, setIndex} = useGameContext()
+  const { host, roomName, gameSettings, setGameSettings, questions, setQuestions, score, setScore, index, setIndex, emails} = useGameContext()
   const { currentUser } = useAuthContext()
   // const { socket } = useContext(SocketContext)
 
@@ -25,7 +25,7 @@ const QuizInProgress = () => {
   if (!currentUser) {
     history.push('/')
 }
-   
+
 
   if (index == questions.length) {
     socket.off('next-question')
@@ -111,7 +111,7 @@ const QuizInProgress = () => {
 
         <h2> answers {index + 1}</h2>
         {options}
-        <CircularProgress variant = "determinate" color = {(percent>30) ? "success": "error"} value = {percent} style = {{transition: 'none'}}/>
+        <CircularProgress size = {300} variant = "determinate" color = {(percent>30) ? "success": "error"} value = {percent} style = {{transition: 'none'}}/>
       </div>
 
 
