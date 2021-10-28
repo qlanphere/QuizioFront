@@ -19,7 +19,7 @@ const BarChart = () => {
         const data = await response.json()
         // array for labels (user names)
         // array for scores
-        setData(data)
+        setData((data.length>=5) ? data.slice(0,5): data)
         console.log(data)
         // WANT TO RETRIEVE ONLY TOP FIVE scores 
     }
