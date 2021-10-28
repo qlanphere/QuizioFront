@@ -5,11 +5,10 @@ const EndGame = () => {
 
     const {emails, score} = useGameContext()
     const {currentUser} = useAuthContext()
-    console.log(emails)
     const filteredEmails = emails.filter((value, index, array) =>array.indexOf(value) === index
     );
     const emailString = filteredEmails.join('*')
-    console.log(emailString)
+    console.log(score)
     const sendScore = {
         game_score: score
     }
@@ -23,12 +22,19 @@ const EndGame = () => {
         body: JSON.stringify(sendScore),
     }
 
-    const retrieve = async () => {
-       const response = await fetch(`http://localhost:3000/user/${currentUser.email}`, options)
-       const data = await response.json()
-       console.log(data)
+    const modify = async () => {
+       await fetch(`http://localhost:3000/user/${currentUser.email}`, options)
+    //    const data = await response.json()
+    //    console.log(data)
     }
 
+    modify()
+
+    const retrieve = async () => {
+        const data = await fetch(`http://localhost:3000/user/${emailString}`)
+        const scores = await data.json()
+        console.log(scores)
+    }
     retrieve()
 
 
