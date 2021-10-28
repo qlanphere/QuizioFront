@@ -15,7 +15,7 @@ const BarChart = () => {
     }, [])
 
     async function retrieve(){
-        const response = await fetch('http://localhost:3000/user/leaderboard')
+        const response = await fetch('https://quizioback.herokuapp.com/user/leaderboard')
         const data = await response.json()
         // array for labels (user names)
         // array for scores

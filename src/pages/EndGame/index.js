@@ -44,7 +44,7 @@ const EndGame = () => {
 
         const modify = async () => {
             let data
-            const response = await fetch(`http://localhost:3000/user/${currentUser.email}`, options)
+            const response = await fetch(`https://quizioback.herokuapp.com/${currentUser.email}`, options)
             data = await response.json()
             if(data) {
             setPatching(false)
@@ -65,7 +65,7 @@ const EndGame = () => {
     }
 
     async function retrieve() {
-        let response = await fetch(`http://localhost:3000/user/${emailString}`, options2)
+        let response = await fetch(`https://quizioback.herokuapp.com/${emailString}`, options2)
         let scores = await response.json()
         setData(scores)
         setRetrieving(false)

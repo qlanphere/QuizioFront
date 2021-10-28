@@ -21,7 +21,7 @@ const Leaderboard = () => {
     }, [])
 
     async function retrieve() {
-        const response = await fetch('http://localhost:3000/user/leaderboard')
+        const response = await fetch('https://quizioback.herokuapp.com/user/leaderboard')
         const data2 = await response.json()
 
         if (data2.length >= 5) {
