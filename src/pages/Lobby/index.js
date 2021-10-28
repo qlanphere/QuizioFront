@@ -1,8 +1,14 @@
 import React, { useState, useContext } from 'react'
 import { useAuthContext } from '../../contexts/auth'
 import { useGameContext } from '../../contexts/gameContext'
-import { useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { SocketContext } from '../../contexts/socketContext';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 
 
@@ -10,10 +16,10 @@ import { SocketContext } from '../../contexts/socketContext';
 
 const Lobby = () => {
 
- 
-    
+
+
     const { currentUser } = useAuthContext()
-    const { host, roomName, players, setQuestions, questions, emails, setEmails} = useGameContext()
+    const { host, roomName, players, setQuestions, questions, emails, setEmails } = useGameContext()
 
     const [numberOfGuests, setNumberOfGuests] = useState(0)
     const history = useHistory();
@@ -26,13 +32,13 @@ const Lobby = () => {
     socket.on('joined', (str, number, email) => {
         // console.log(`my id is ${socket.id}`)
         // console.log(`${user} has joined room: ${room}`)
-        if (str) {displayMessage(str)}
+        if (str) { displayMessage(str) }
         //console.log(email)
-        
-        setNumberOfGuests(number)  
-        
+
+        setNumberOfGuests(number)
+
         socket.emit('send-emails', roomName, currentUser.email)
-        
+
         // setEmails(Array.from(new Set(emails)))
     })
 
@@ -43,7 +49,7 @@ const Lobby = () => {
     socket.on("userLeft", (guests) => {
         //console.log(guests)
         setNumberOfGuests(guests)
-      });
+    });
 
     socket.on('questions', (questions) => {
         console.log(questions)
@@ -56,8 +62,8 @@ const Lobby = () => {
         const div = document.getElementById('messages')
         div.textContent = str //use ref
     }
-   
-    function handleStartGame(e){
+
+    function handleStartGame(e) {
         e.preventDefault()
 
         if (currentUser.name === host) {
@@ -68,29 +74,45 @@ const Lobby = () => {
     }
 
     const centerStyle = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: 'center'
-}
+        display: "flex",
+        justifyContent: "center",
+        alignItems: 'center'
+    }
 
     return (
         <div id="Lobby">
+            
+
+                <Card sx={{ minWidth: 275 }}>
+                <div className='d-flex'>
+                    <div className='col justify-content-center'>
+                        <CardContent>
+                            <Typography variant="h5" component="div">
+                                welcome to room: {roomName}
+                            </Typography>
+                            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                Waiting for players to join..
+                            </Typography>
+
+                        </CardContent>
+                        <CardActions className = 'justify-content-center'>
+                            {(host === currentUser.name) ?
+                                <Button className = 'justify-content-center' variant="contained" id="start-game" onClick={handleStartGame}>Start Game</Button>
+                                : <></>}
+                        </CardActions>
+                    </div>
+                    <Card  className = 'justify-content-center col bg-primary'><div style = {{color: 'white'}} className = 'justify-content-center'>Notifications</div>
+                        <Card className = "mt-2 mx-2">
+                    <div id = "messages" style = {centerStyle}></div>
+                    </Card>
+                    </Card>
+                    </div>
+                </Card>
+
+            </div>
+             )}
 
 
-            <h2>welcome to the room {roomName} </h2>
-            <h2>Host is  {host} </h2>
-            <h3>Players: {players}</h3>
-            <h4> Waiting for players to join..</h4>
-            <div>There are {numberOfGuests} Guests in Lobby</div>
-            <div id = "messages"style = {centerStyle}></div>
 
-     
-          { (host === currentUser.name) ?
-            <button id="start-game" onClick={handleStartGame}>Start Game</button>
-            : <></>}
 
-        </div>
-    )
-}
-
-export default Lobby
+            export default Lobby
