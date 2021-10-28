@@ -1,8 +1,18 @@
 import React, {useState, useContext, useEffect} from 'react'
+
+
 import { useAuthContext } from '../../contexts/auth'
 import { useHistory } from "react-router-dom";
 import { useGameContext } from '../../contexts/gameContext'
 import { SocketContext } from '../../contexts/socketContext';
+
+import Button from '@mui/material/Button';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Typography from '@mui/material/Typography';
+import undraw_1 from '../../img/undraw_1.png'
+
 
 
 const CreateRoom = () => {
@@ -49,18 +59,54 @@ function joinRoom(e) { //would be better to create settings before creating room
 }
     return (
 
-        <div>
-            <h2>Welcome</h2>
+        <div className="box" >
+           <Typography variant="h2" gutterBottom component="div">
+       Welcome to Quizio!
+      </Typography>
+   
+
+      
+                <img src = {undraw_1} className="img" ></img>
+
+      
+
+
             <form onSubmit = {joinRoom}>
-            <h3>Enter Room Name: <input type = "text" ></input></h3>
-            <span>
-                <label htmlFor = "join">Join</label>
+            <Typography variant="h5" gutterBottom component="div">
+        Enter Room Name
+      </Typography>
+                
+                <input type = "text" ></input>
+            <div className="box">
+            <FormGroup onSubmit={joinRoom} className="box"> 
+                <FormControlLabel
+            control={
+                <Checkbox checked={join} onChange={handleJoin} name="join" />
+            }
+            label="Joining your friends?"
+          />
+            <FormControlLabel
+            control={
+                <Checkbox checked={create} onChange={handleCreate} name="create" />
+            }
+            label="or creating a new room?"
+          />
+
+             </FormGroup>
+            <Button  type="submit" variant="contained" size="large">{join? "Join": "Create"}</Button>
+            </div>
+
+
+
+
+
+{/*
+            <label htmlFor = "join">Join</label>
                 <input style = {{marginRight: '10px', marginLeft: '10px'}}  onChange = {handleJoin} checked = {join} type = "checkbox" name = "join"></input>
                 <label htmlFor = "create">Create Room</label>
                 <input style = {{marginRight: '10px', marginLeft: '10px'}} onChange = {handleCreate} checked = {create} type = "checkbox" name = "create"></input>
                 {/* <button  >New Room</button> */}
-                <button type = "submit">Submit</button>
-                </span>
+                
             </form>
         </div>
     )

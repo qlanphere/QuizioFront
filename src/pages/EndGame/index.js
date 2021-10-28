@@ -66,12 +66,6 @@ const EndGame = () => {
         let scores = await response.json()
         setData(scores)
         setRetrieving(false)
-        // let gameScores = gameUsers.map(user => user.last_score)
-        // let roomUsers = gameUsers.map(user => user.username)
-
-        // setFinalScores(gameScores)
-        // setUserNames(roomUsers)
-        //return scores
     }
     
 
@@ -99,7 +93,6 @@ const EndGame = () => {
 
     return (
         <>
-
 
             <div>Game over!</div>
 
