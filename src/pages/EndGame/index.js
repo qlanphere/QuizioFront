@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useGameContext } from "../../contexts/gameContext";
 import { useAuthContext } from "../../contexts/auth";
 const EndGame = () => {
 
     const {emails, score} = useGameContext()
     const {currentUser} = useAuthContext()
+
+
+    useEffect(() => {
     const filteredEmails = emails.filter((value, index, array) =>array.indexOf(value) === index
     );
     const emailString = filteredEmails.join('*')
@@ -36,6 +39,7 @@ const EndGame = () => {
         console.log(scores)
     }
     retrieve()
+}, [])
 
 
 
