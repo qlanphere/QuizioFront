@@ -55,13 +55,6 @@ const BarChart = () => {
             }}
            options={{
                maintainAspectRatio: true,
-            //    scales: {
-            //        yAxes: [
-            //            {ticks: {
-            //                beginAtZero: true,
-            //            }}
-            //        ]
-            //    }
         }}
            />
         </>

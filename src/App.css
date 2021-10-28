@@ -30,3 +30,10 @@ h1,h2,h3,h4,h5{
 .App-link {
   color: #61dafb;
 }
+
+.centerStyle {
+    display: flex;
+    justify-Content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
