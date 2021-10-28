@@ -32,9 +32,9 @@ const QuizInProgress = () => {
       setGameStarted(true)
     }
 
-      socket.on('timer', (count) => {
-        console.log(count)
-      })
+      // socket.on('timer', (count) => {
+      //   console.log(count)
+      // })
     
       socket.on('next-question', () => {
         // console.log(index, questions.length)
@@ -46,9 +46,12 @@ const QuizInProgress = () => {
 
 
   function handleNextQuestion() {
+    console.log(score)
+    console.log(index)
     if(chosenAnswer === decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
       setScore(prev => prev + 10)
       setIndex(prev => prev + 1)
+      console.log(`current index is ${index}`)
       console.log(`User's score is ${score}`)
     } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
       setIndex(prev => prev + 1)
