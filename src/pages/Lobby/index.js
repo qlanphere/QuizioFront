@@ -24,10 +24,10 @@ const Lobby = () => {
     }
 
     socket.on('joined', (str, number, email) => {
-         console.log(`my id is ${socket.id}`)
+        // console.log(`my id is ${socket.id}`)
         // console.log(`${user} has joined room: ${room}`)
         if (str) {displayMessage(str)}
-        console.log(email)
+        //console.log(email)
         
         setNumberOfGuests(number)  
         
@@ -41,7 +41,7 @@ const Lobby = () => {
     })
 
     socket.on("userLeft", (guests) => {
-        console.log(guests)
+        //console.log(guests)
         setNumberOfGuests(guests)
       });
 
