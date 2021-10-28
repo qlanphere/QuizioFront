@@ -4,9 +4,14 @@
   align-items: center;
   
 }
-
+h1,h2,h3,h4,h5{
+  color:#0d6efd;
+}
 .img{
   height: 30vh;
+}
+.img-main{
+  height: 40vh;
 }
 .box{
   align-items: center;
@@ -16,10 +21,10 @@
 .body{
   display: flex;
   flex-direction: column;
-  background-color:#aecfeb;
+  background-color:#70c3fa;
   min-height: 100vh;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(133, 163, 245);
 }
 
 .App-link {

@@ -60,7 +60,7 @@ function joinRoom(e) { //would be better to create settings before creating room
     return (
 
         <div className="box" >
-           <Typography variant="h2" gutterBottom component="div">
+           <Typography variant="h2" gutterBottom component="div" color="primary">
        Welcome to Quizio!
       </Typography>
    
@@ -72,22 +72,22 @@ function joinRoom(e) { //would be better to create settings before creating room
 
 
             <form onSubmit = {joinRoom}>
-            <Typography variant="h5" gutterBottom component="div">
+            <Typography variant="h5" gutterBottom component="div" >
         Enter Room Name
       </Typography>
                 
                 <input type = "text" ></input>
             <div className="box">
-            <FormGroup onSubmit={joinRoom} className="box"> 
+            <FormGroup onSubmit={joinRoom} className="box" > 
                 <FormControlLabel
             control={
-                <Checkbox checked={join} onChange={handleJoin} name="join" />
+                <Checkbox checked={join} onChange={handleJoin} name="join"  />
             }
             label="Joining your friends?"
           />
             <FormControlLabel
             control={
-                <Checkbox checked={create} onChange={handleCreate} name="create" />
+                <Checkbox checked={create} onChange={handleCreate} name="create"  />
             }
             label="or creating a new room?"
           />

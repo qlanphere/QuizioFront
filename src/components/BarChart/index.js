@@ -40,8 +40,8 @@ const BarChart = () => {
                     {
                     label: 'Games Played',
                     data:totalGames,
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-                    borderColor: ['rgba(255, 99, 132, 1'],
+                    backgroundColor: ['rgb(130, 180, 236,1)'],
+                    borderColor: ['rgba(23, 29, 155, 1'],
                     borderWidth: 1
                 },
                 {
