@@ -66,6 +66,7 @@ const QuizInProgress = () => {
     if(chosenAnswer === decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
       setScore(prev => prev + 10)
       setIndex(prev => prev + 1)
+      console.log(`current index is ${index}`)
       console.log(`User's score is ${score}`)
     } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
       setIndex(prev => prev + 1)
