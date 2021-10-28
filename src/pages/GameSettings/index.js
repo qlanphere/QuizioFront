@@ -69,6 +69,7 @@ async function fetchQuiz(numberOfQuestions, level, topic) {
     setGameSettings({topic: topic[0].id, numberOfQuestions: numberOfQuestions, level: difficulty})
     setHost(currentUser.name)
     fetchQuiz(numberOfQuestions, difficulty, topic[0].id)
+    socket.emit('join-room', roomName, `${currentUser.name} has joined room: ${roomName}`, currentUser.email)
 
     history.push(`/lobby/${roomName}`)
   }
