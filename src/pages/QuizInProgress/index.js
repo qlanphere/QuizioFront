@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useHistory, useParams } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/auth'
+import { useHistory } from 'react-router-dom';
 import { useGameContext } from '../../contexts/gameContext'
-import { SocketContext, socket } from '../../contexts/socketContext';
+import { socket } from '../../contexts/socketContext';
 import Question from "../../components/Question";
-import { Answers } from '../../components';
+import {Button} from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress'
 import './quiz.css'
 
 const QuizInProgress = () => {
@@ -16,6 +16,8 @@ const QuizInProgress = () => {
   const history = useHistory();
   const [chosenAnswer,setChosenAnswer]=useState()
   const [gameStarted, setGameStarted] = useState(false)
+  const [percent, setPercent] = useState(100)
+  const [questionChanged, setQuestionChanged] = useState(false)
   let options
    
 
@@ -32,22 +34,29 @@ const QuizInProgress = () => {
       setGameStarted(true)
     }
 
-      // socket.on('timer', (count) => {
-      //   console.log(count)
-      // })
+      socket.on('timer', (count) => {
+        //console.log(count)
+        setPercent(count/100)
+      })
     
       socket.on('next-question', () => {
         // console.log(index, questions.length)
-        handleNextQuestion()
+        // handleNextQuestion(i)
+        setQuestionChanged(true)
+        setPercent(100)
         socket.emit('question-load')
       })
     
   }, []);
 
+  if (questionChanged) {
+    handleNextQuestion()
+    setQuestionChanged(false)
+  }
+
 
   function handleNextQuestion() {
-    console.log(score)
-    console.log(index)
+    console.log(index, chosenAnswer)
     if(chosenAnswer === decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
       setScore(prev => prev + 10)
       setIndex(prev => prev + 1)
@@ -69,9 +78,10 @@ const QuizInProgress = () => {
   // ------  handling choice  
   function handleChoice(event) {
     let choice;
-    choice = event.target.innerText
+    choice = (event.target.innerText)
     setChosenAnswer(choice)
     console.log(choice)
+    console.log(questions[index].correct_answer)
     if(choice === decodeURIComponent(questions[index].correct_answer)){
       console.log(questions[index].correct_answer)
       console.log('you are correct')
@@ -82,7 +92,7 @@ const QuizInProgress = () => {
     // <button key={i} onClick={handleAnswer } >{decodeURIComponent(answ)}</button>)
     <div>
 
-      <p key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</p>
+      <Button  style = {{textTransform: 'none'}}  key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</Button>
     </div>)
   }
 
@@ -96,6 +106,7 @@ const QuizInProgress = () => {
 
         <h2> answers {index + 1}</h2>
         {options}
+        <CircularProgress variant = "determinate" color = {(percent>30) ? "success": "error"} value = {percent} style = {{transition: 'none'}}/>
       </div>
 
 
