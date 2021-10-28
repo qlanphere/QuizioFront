@@ -4,9 +4,12 @@ import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import BarChart from '../../components/BarChart'
 import Leaderboard from '../../components/Leaderboard'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import undraw_2 from "../../img/undraw_2.png"
 
 const Home = () => {
     return (
+        <div className="box">
+
         <div className="d-flex">
             <div className="m-2 flex-fill">
                 <Paper elevation={5}>
@@ -47,6 +50,8 @@ const Home = () => {
             <div className="m-2 flex-fill">
                 <Leaderboard />
             </div>
+        </div>
+            <img src={undraw_2} className="img-main"></img> 
         </div>
     )
 }

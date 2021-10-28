@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useGameContext } from "../../contexts/gameContext";
 import { useAuthContext } from "../../contexts/auth";
 import { Bar } from 'react-chartjs-2'
+import undraw_3 from '../../img/undraw_3.png'
+import Typography from '@mui/material/Typography';
+
 const EndGame = () => {
 
     const { emails, score } = useGameContext()
@@ -93,10 +96,17 @@ const EndGame = () => {
 
     return (
         <>
+        <div className="box">
 
-            <div>Game over!</div>
-
-            <p>Final Score: {score}</p>
+    <Typography variant="h2" gutterBottom component="div" color="primary">
+       Game over!
+      </Typography>
+           
+ <img src={undraw_3} className="img"></img>
+ <Typography variant="h5" gutterBottom component="div" color="primary">
+ Final Score: {score}
+      </Typography>
+           
             <p>{loading ? "Loading" : " "}</p>
 
             <Bar
@@ -106,24 +116,25 @@ const EndGame = () => {
                         {
                             label: 'Games Played',
                             data: gameScore,
-                            backgroundColor: ['rgba(255, 99, 132, 0.2)'],
-                            borderColor: ['rgba(255, 99, 132, 1'],
+                            backgroundColor: ['rgb(130, 180, 236,1)'],
+                            borderColor: ['rgba(23, 29, 155, 1'],
                             borderWidth: 1
                         }
-
+                        
                     ]
                 }}
                 options={{
                     maintainAspectRatio: true,
                     //    scales: {
-                    //        yAxes: [
-                    //            {ticks: {
-                    //                beginAtZero: true,
-                    //            }}
-                    //        ]
-                    //    }
-                }} />
+                        //        yAxes: [
+                            //            {ticks: {
+                                //                beginAtZero: true,
+                                //            }}
+                                //        ]
+                                //    }
+                            }} />
 
+                            </div>
             </>
     )
 }
