@@ -1,15 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useGameContext } from "../../contexts/gameContext";
 import { useAuthContext } from "../../contexts/auth";
 import {Bar} from 'react-chartjs-2'
-
 const EndGame = () => {
 
     const {emails, score} = useGameContext()
     const {currentUser} = useAuthContext()
+    // const [finalScores, setFinalScores] = useState([])
+    // const [userNames, setUserNames] = useState([])
+    const [data, setData] = useState([])
+
     const filteredEmails = emails.filter((value, index, array) =>array.indexOf(value) === index
     );
     const emailString = filteredEmails.join('*')
+
+
+    useEffect(() => {
+    
     console.log(score)
     const sendScore = {
         game_score: score
@@ -32,30 +39,57 @@ const EndGame = () => {
 
     modify()
 
-    const retrieve = async () => {
-        const data = await fetch(`http://localhost:3000/user/${emailString}`)
-        const scores = await data.json()
-        console.log(scores)
+
+    retrieve()
+
+    
+
+}, [])
+
+let options2 = {
+    headers: {
+        'Content-Type': 'application/json',
+        authorization: localStorage.getItem("token")
     }
-    const finalScores = retrieve()
+}
+
+async function retrieve () {
+    let response = await fetch(`http://localhost:3000/user/${emailString}`, options2)
+    let scores = await response.json()
+    setData(scores)
+    // let gameScores = gameUsers.map(user => user.last_score)
+    // let roomUsers = gameUsers.map(user => user.username)
+
+    // setFinalScores(gameScores)
+    // setUserNames(roomUsers)
+    //return scores
+}
+console.log(data)
+let finalScores =  data.map(user => user.last_score)
+let userNames = data.map(user => user.username)
 
 
 
     return (
         <>
+
+
             <div>Game over!</div>
+
             <p>Final Score: {score}</p>
+
             <Bar
             data = {{
-                labels: filteredEmails,
+                labels:userNames,
                 datasets: [
-                {
-                    label: 'Final Scores',
-                    data: finalScores,
-                    backgroundColor: ['orange'],
-                    borderColor: 'red',
+                    {
+                    label: 'Games Played',
+                    data:finalScores,
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1'],
                     borderWidth: 1
                 }
+                
                 ]
             }}
            options={{
@@ -67,8 +101,9 @@ const EndGame = () => {
             //            }}
             //        ]
             //    }
-        }}/>
-    </>
+        }} />
+
+        </>
     )
 }
 
