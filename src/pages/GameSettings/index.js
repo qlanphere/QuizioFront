@@ -83,8 +83,8 @@ return (
             <option value = "General Knowledge">General Knowledge</option>
             <option value = "Entertainment: Film">Entertainment: Film</option>
             <option value = "Entertainment: Music">Entertainment: Music</option>
-            <option value = "Entertainment: Television">Entertainement: Television</option>
-            <option value = "Entertainemnt: Video Games">Entertainemnt: Video Games</option>
+            <option value = "Entertainment: Television">Entertainment: Television</option>
+            <option value = "Entertainment: Video Games">Entertainment: Video Games</option>
             <option value = "Science & Nature">Science & Nature</option>
             <option value = "Science: Computers">Science: Computers</option>
             <option value = "Sports">Sports</option>

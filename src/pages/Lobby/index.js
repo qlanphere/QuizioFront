@@ -28,7 +28,9 @@ const Lobby = () => {
         if (str) {displayMessage(str)}
         setNumberOfGuests(number)  
         setEmails(prev => [...prev, email])
+        console.log(emails)
         setEmails(Array.from(new Set(emails)))
+        console.log(emails)
     })
 
     socket.on("userLeft", (guests) => {
