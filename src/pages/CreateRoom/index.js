@@ -78,7 +78,7 @@ function joinRoom(e) { //would be better to create settings before creating room
                 
                 <input type = "text" ></input>
             <div className="box">
-            <FormGroup> 
+            <FormGroup onSubmit={joinRoom} className="box"> 
                 <FormControlLabel
             control={
                 <Checkbox checked={join} onChange={handleJoin} name="join" />
@@ -93,7 +93,7 @@ function joinRoom(e) { //would be better to create settings before creating room
           />
 
              </FormGroup>
-            <Button variant="contained">{join? "Join": "Create"}</Button>
+            <Button  type="submit" variant="contained" size="large">{join? "Join": "Create"}</Button>
             </div>
 
 
