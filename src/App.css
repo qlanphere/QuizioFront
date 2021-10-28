@@ -17,3 +17,10 @@
 .App-link {
   color: #61dafb;
 }
+
+.centerStyle {
+    display: flex;
+    justify-Content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
