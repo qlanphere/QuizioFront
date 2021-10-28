@@ -28,6 +28,7 @@ const Login = () => {
     }
     return (
         <>
+            <h1>Login</h1>
             <form onSubmit={handleSubmit} aria-label="login">
                 <div className="mt-5">
                     <div className="m-2">
@@ -41,6 +42,7 @@ const Login = () => {
                     <div className="m-2">
                         <input type="submit" className={formIncomplete() ? 'disabled' : 'enabled'} disabled={formIncomplete()} value="Login" />
                     </div>
+                    <p>Not register yet? <a className={styles.a} href="/register">Create an Account</a></p>
                 </div>
 
             </form>
