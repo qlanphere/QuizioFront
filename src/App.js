@@ -2,11 +2,12 @@ import {
   BrowserRouter as Router,
   Link, Route, Switch, useParams
 } from 'react-router-dom';
-import { Login, CreateRoom, Register, Lobby, GameSettings, QuizInProgress, EndGame } from './pages';
+import { Login, CreateRoom, Register, Lobby, GameSettings, QuizInProgress, EndGame, Home} from './pages';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import './App.css';
 import Liderboard from './components/Leaderboard';
 import NavigationBar from './components/NavBar/NavigationBar';
+import BarChart from './components/BarChart/index'
 import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
@@ -16,6 +17,10 @@ function App() {
       <Router>
         <NavigationBar/>
         <Switch>
+          <Route exact path="/">
+            <Home/>
+            <BarChart/>
+          </Route>
           <Route exact path="/login">
             <Login />
           </Route>

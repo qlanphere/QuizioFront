@@ -16,8 +16,6 @@ async function getLiderboard() {
         const data = await fetch(url)
         const leaderboard = await data.json();
         setLeaderboard(leaderboard)
-        
-        
     } catch (err) {
         setError(err.message);
     }
