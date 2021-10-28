@@ -6,7 +6,7 @@ const NavigationBar = () => {
     const {currentUser, logout} = useAuthContext()
     console.log(currentUser)
     return (
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="primary" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
                         {/* <img src={} width="" height=""/> */}

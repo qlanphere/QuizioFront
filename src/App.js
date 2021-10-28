@@ -19,8 +19,8 @@ function App() {
         <NavigationBar/>
         <Switch>
           <Route exact path="/">
-            <Home/>
-            <BarChart/>
+              <Home/>
+              <BarChart/>
           </Route>
           <Route exact path="/login">
             <Login />
