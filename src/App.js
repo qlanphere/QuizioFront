@@ -20,7 +20,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home/>
-            <BarChart/>
+          
           </Route>
           <Route exact path="/login">
             <Login />
