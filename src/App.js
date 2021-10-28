@@ -21,28 +21,28 @@ function App() {
           <Route exact path="/">
             <Home/>
           </Route>
-          <Route exact path="/login">
+          <Route path="/login">
             <Login />
           </Route>
-          <Route exact path="/register">
+          <Route path="/register">
             <Register />
           </Route>
-          <CustomRoutes.PrivateRoute exact path="/room">
+          <CustomRoutes.PrivateRoute path="/room">
             <CreateRoom />
           </CustomRoutes.PrivateRoute>
-          <CustomRoutes.PrivateRoute exact path="/lobby/:room">
+          <CustomRoutes.PrivateRoute path="/lobby/:room">
             <Lobby />
           </CustomRoutes.PrivateRoute>
-          <CustomRoutes.PrivateRoute exact path="/settings/:room">
+          <CustomRoutes.PrivateRoute path="/settings/:room">
             < GameSettings />
           </CustomRoutes.PrivateRoute>
-          <CustomRoutes.PrivateRoute exact path="/game/:room">
+          <CustomRoutes.PrivateRoute path="/game/:room">
             < QuizInProgress />
           </CustomRoutes.PrivateRoute>
-          <CustomRoutes.PrivateRoute exact path="/finish/:room">
+          <CustomRoutes.PrivateRoute path="/finish/:room">
             < EndGame />
           </CustomRoutes.PrivateRoute>
-          <CustomRoutes.PrivateRoute exact path="/liderboard">
+          <CustomRoutes.PrivateRoute path="/liderboard">
             < Liderboard />
           </CustomRoutes.PrivateRoute>
           <Route><NotFound /></Route>
