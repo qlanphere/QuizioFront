@@ -1,6 +1,8 @@
 import React from 'react'
 import { Paper, Typography, List, ListItem, ListItemText, ListItemIcon} from '@mui/material'
 import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import BarChart from '../../components/BarChart'
+import Leaderboard from '../../components/Leaderboard'
 const Home = () => {
     return (
         <>
@@ -39,8 +41,18 @@ const Home = () => {
                 </List>
 
             </Paper>
+                    <div>
+                        <h1>Welcome to Quizio!</h1>
+                        <h2>Instructions:</h2>
+                <BarChart />
+                <Leaderboard />
+                        
+                    </div>
         </>
-    )
-}
+
+
+        
+
+    )}
 
 export default Home
