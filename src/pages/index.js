@@ -6,3 +6,4 @@ export {default as GameSettings} from './GameSettings';
 export {default as QuizInProgress} from './QuizInProgress'
 export {default as EndGame} from './EndGame'
 export {default as Home} from './Home'
+export {default as NotFound} from './NotFound'

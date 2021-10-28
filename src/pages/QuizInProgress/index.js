@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom';
+import { useAuthContext } from '../../contexts/auth'
 import { useGameContext } from '../../contexts/gameContext'
 import { socket } from '../../contexts/socketContext';
 import Question from "../../components/Question";
@@ -11,6 +12,7 @@ const QuizInProgress = () => {
  
 
   const { host, roomName, gameSettings, setGameSettings, questions, setQuestions, score, setScore, index, setIndex} = useGameContext()
+  const { currentUser } = useAuthContext()
   // const { socket } = useContext(SocketContext)
 
   const history = useHistory();
@@ -19,6 +21,10 @@ const QuizInProgress = () => {
   const [percent, setPercent] = useState(100)
   const [questionChanged, setQuestionChanged] = useState(false)
   let options
+
+  if (!currentUser) {
+    history.push('/')
+}
    
 
   if (index == questions.length) {

@@ -7,6 +7,8 @@ import { SocketContext } from '../../contexts/socketContext';
 
 const CreateRoom = () => {
 
+
+
     const [join, setJoin] = useState(true)
     const [create, setCreate] = useState(false)
     
@@ -14,6 +16,10 @@ const {currentUser} = useAuthContext()
 const {setHost, roomName, setRoomName, players, setPlayers, message, setMessage} = useGameContext()
 const history = useHistory();
 const socket = useContext(SocketContext)
+
+if (!currentUser) {
+    history.push('/')
+}
 
 
 function handleJoin () {

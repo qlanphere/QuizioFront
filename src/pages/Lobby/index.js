@@ -10,17 +10,18 @@ import { SocketContext } from '../../contexts/socketContext';
 
 const Lobby = () => {
 
+ 
     
     const { currentUser } = useAuthContext()
     const { host, roomName, players, setQuestions, questions, emails, setEmails} = useGameContext()
+
     const [numberOfGuests, setNumberOfGuests] = useState(0)
     const history = useHistory();
     const socket = useContext(SocketContext)
 
-    // socket.on('connect', function() {   //  'connect' event is received on client on every connection start.
-    //     console.log(socket.id)
-    //     socket.emit('join', currentUser.name);  //  where 'user' is your object containing email.
-    // })
+    if (!currentUser) {
+        history.push('/')
+    }
 
     socket.on('joined', (str, number, email) => {
          console.log(`my id is ${socket.id}`)
@@ -63,10 +64,6 @@ const Lobby = () => {
     justifyContent: "center",
     alignItems: 'center'
 }
-
-    
-
-    
 
     return (
         <div id="Lobby">
