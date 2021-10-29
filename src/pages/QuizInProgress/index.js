@@ -62,15 +62,15 @@ const QuizInProgress = () => {
 
 
   function handleNextQuestion() {
-    if(chosenAnswer === decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
+    if(chosenAnswer.toLowerCase() === decodeURIComponent(questions[index].correct_answer.toLowerCase()) && index < questions.length -1){
       setScore(prev => prev + 10)
       setIndex(prev => prev + 1)
       console.log(`current index is ${index}`)
       console.log(`User's score is ${score}`)
-    } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index < questions.length -1){
+    } else if (chosenAnswer.toLowerCase() !== decodeURIComponent(questions[index].correct_answer.toLowerCase()) && index < questions.length -1){
       setIndex(prev => prev + 1)
       console.log(`User's score is ${score}`)
-    } else if (chosenAnswer !== decodeURIComponent(questions[index].correct_answer) && index === questions.length -1) {
+    } else if (chosenAnswer.toLowerCase() !== decodeURIComponent(questions[index].correct_answer.toLowerCase()) && index === questions.length -1) {
       console.log(`User's score is ${score}`)
       history.push(`/finish/${roomName}`)
     } else {
@@ -85,9 +85,11 @@ const QuizInProgress = () => {
     let choice;
     choice = (event.target.innerText)
     setChosenAnswer(choice)
-    console.log(choice)
-    console.log(questions[index].correct_answer)
-    if(choice === decodeURIComponent(questions[index].correct_answer)){
+    console.log("choice", choice)
+    console.log("correct",questions[index].correct_answer)
+    console.log('index', index)
+    
+    if(choice.toLowerCase() === decodeURIComponent(questions[index].correct_answer).toLowerCase()){
       console.log(questions[index].correct_answer)
       console.log('you are correct')
     }
@@ -95,21 +97,22 @@ const QuizInProgress = () => {
   if (index < questions.length) {
   options = questions[index].allOptions.map((answ, i) =>
     // <button key={i} onClick={handleAnswer } >{decodeURIComponent(answ)}</button>)
+    //className={(decodeURIComponent(answ).toLowerCase()===chosenAnswer.toLowerCase()
     <div>
 
-      <Button  style = {{textTransform: 'none'}}  key={i} onClick={handleChoice} className={(decodeURIComponent(answ)===chosenAnswer)?"chosen":"answer"}>{decodeURIComponent(answ)}</Button>
+      <Button  style = {{fontSize:'1em'}}  key={i} onClick={handleChoice}>{decodeURIComponent(answ)}</Button>
     </div>)
   }
 
   return (
     <div  >
 
-      <h2> Quiz in progress</h2>
+      <h2> </h2>
       {(index<questions.length) ? <Question index={index} />: <></>}
 
       <div>
 
-        <h2> answers {index + 1}</h2>
+        
         {options}
         <CircularProgress size = {300} variant = "determinate" color = {(percent>30) ? "success": "error"} value = {percent} style = {{transition: 'none'}}/>
       </div>

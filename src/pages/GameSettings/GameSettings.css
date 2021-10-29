@@ -1,0 +1,25 @@
+.input{
+    width: 100%;
+    margin-left: 5px;
+}
+.dropdown{
+    width: 100%;
+   margin:0;
+   
+
+    justify-content: center;
+}
+.input:focus{
+    outline: none !important;
+    border: 1px solid blue;
+    box-shadow: 0 0 1px #719ECE;
+}
+
+.a {
+    text-decoration: none;
+    font-weight: bold;
+}
+.form{
+    justify-content: center;
+    align-items: center;
+}
