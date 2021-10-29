@@ -3,6 +3,18 @@ import { useAuthContext } from '../../contexts/auth'
 import { useGameContext } from '../../contexts/gameContext' 
 import { useHistory, useParams } from 'react-router-dom';
 import { SocketContext } from '../../contexts/socketContext';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import  './GameSettings.css'
+
+
+import { styled } from '@mui/material/styles';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import NativeSelect from '@mui/material/NativeSelect';
+import InputBase from '@mui/material/InputBase';
 
 const GameSettings = () =>{
 
@@ -76,11 +88,22 @@ async function fetchQuiz(numberOfQuestions, level, topic) {
 
 
 return (
-    <div id="settings">
-        <h2>welcome to  {roomName} </h2>
-        <h2> choose settings: </h2>
-        <form onSubmit = {handleSubmit}>
-          <select id = "cateogry"name = "categories">
+    <div id="settings" className="box">
+
+<Typography variant="h3" gutterBottom component="div" color="primary">
+Welcome to the room {roomName}
+      </Typography>
+     
+      <Typography variant="h5" gutterBottom component="div" color="primary">
+      Choose settings:
+      </Typography>
+        
+        <form onSubmit = {handleSubmit} className="box">
+
+         <div className="dropdown box">
+
+          <select id = "cateogry" name = "categories">
+          <option value="" disabled selected>Select category</option>
             <option value = "General Knowledge">General Knowledge</option>
             <option value = "Entertainment: Film">Entertainment: Film</option>
             <option value = "Entertainment: Music">Entertainment: Music</option>
@@ -94,14 +117,86 @@ return (
             <option value = "Politics">Politics</option>
             <option value = "Science: Gadgets">Science: Gadgets</option>
           </select>
-          <input type = "text" placeholder = "number of questions"></input>
+         </div>
+      
+         {/*}
+          <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <InputLabel id="categoryLabel">Category</InputLabel>
+        <Select
+           labelId="categoryLabel"
+           id="cateogry"
+          label="Category">
+           <MenuItem value="General Knowledge">General Knowledge</MenuItem>
+           <MenuItem value="Entertainment: Film">Entertainment: Film</MenuItem>
+           <MenuItem value="Entertainment: Music">Entertainment: Music</MenuItem>
+           <MenuItem value="Entertainment: Television">Entertainment: Television</MenuItem>
+           <MenuItem value="Entertainment: Video Games">Entertainment: Video Games</MenuItem>
+           <MenuItem value="Science & Nature">Science & Nature</MenuItem>
+           <MenuItem value="Science: Computers">Science: Computers</MenuItem>
+           <MenuItem value="Sports">Sports"</MenuItem>
+           <MenuItem value="Geography">Geography</MenuItem>
+           <MenuItem value="History">History</MenuItem>
+           <MenuItem value="Politics">Politics</MenuItem>
+           <MenuItem value="Science: Gadgets">Science: Gadgets</MenuItem>
+ </Select>
+        </FormControl>
+          */}
 
-          <select>
+{/*}
+        <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <InputLabel id="selectNumbeLabel">Number of questions</InputLabel>
+        <Select
+           labelId="selectNumberLabel"
+           id="Number"
+          label="Category">
+           <MenuItem value={1}>1</MenuItem>
+           <MenuItem value={2}>2</MenuItem>
+           <MenuItem value={3}>3</MenuItem>
+           <MenuItem value={4}>4</MenuItem>
+           <MenuItem value={5}>5</MenuItem>
+           <MenuItem value={6}>6</MenuItem>
+           <MenuItem value={7}>7</MenuItem>
+           <MenuItem value={8}>8</MenuItem>
+           <MenuItem value={9}>9</MenuItem>
+           <MenuItem value={10}>10</MenuItem>
+           
+ </Select>
+        </FormControl>
+*/}
+
+          {/* 
+
+<FormControl sx={{ m: 1 }} variant="standard">
+        <InputLabel htmlFor="numberOfQuestions">NumberOfQuestions</InputLabel>
+        <BootstrapInput id="numberofQuestions" />
+      </FormControl>
+    */}
+
+          <input type = "text" placeholder = "number of questions"></input>
+          
+        {/*
+<FormControl sx={{ m: 1, minWidth: 120 }}>
+<InputLabel id="selectDiffLabel">Difficulty</InputLabel>
+<Select
+labelId="selectDiffLabel"
+id="selectDiff"
+label="Difficulty">
+<MenuItem value="easy">Easy</MenuItem>
+<MenuItem value="medium">Medium</MenuItem>
+<MenuItem value="hard">Hard</MenuItem>
+</Select>
+</FormControl>
+*/}
+
+<div className="dropdown"> 
+<select>
+<option value="" disabled selected>Select difficulty</option>
             <option value = "easy">Easy</option>
             <option value = "medium">Medium</option>
             <option value = "hard">Hard</option>
-          </select>
-          <button type = "submit">Submit</button>
+          </select> 
+</div>
+          <Button  type="submit" variant="contained" size="large">Submit</Button>
           
 
         </form>

@@ -10,6 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import book from '../book.gif'
+import undraw_5 from '../../img/undraw_5.png'
 
 
 
@@ -90,7 +91,7 @@ const Lobby = () => {
 
 
     return (
-        <div id="Lobby">
+        <div id="Lobby" className="box">
             
 
                 <Card  className = 'justify-content-center'sx={{ minWidth: 275 }} style = {{marginTop: '100px'}}>
@@ -103,7 +104,6 @@ const Lobby = () => {
                             <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                 Waiting for players to join..
                             </Typography>
-                            <img style = {{width: 'auto', height: 'auto', maxWidth: '100%'}} src = {book}/>
                         </CardContent>
                         <CardActions className = 'justify-content-center'>
                             {(host === currentUser.name) ?
@@ -118,6 +118,7 @@ const Lobby = () => {
                     </Card>
                     </div>
                 </Card>
+                                 <img style = {{ height: '40vh'}} src = {undraw_5}/> 
 
             </div>
              )}
