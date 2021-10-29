@@ -16,7 +16,7 @@ const QuizInProgress = () => {
   // const { socket } = useContext(SocketContext)
 
   const history = useHistory();
-  const [chosenAnswer,setChosenAnswer]=useState()
+  const [chosenAnswer,setChosenAnswer]=useState('a')
   const [gameStarted, setGameStarted] = useState(false)
   const [percent, setPercent] = useState(100)
   const [questionChanged, setQuestionChanged] = useState(false)
@@ -100,7 +100,7 @@ const QuizInProgress = () => {
     //className={(decodeURIComponent(answ).toLowerCase()===chosenAnswer.toLowerCase()
     <div>
 
-      <Button  style = {{fontSize:'1em'}}  key={i} onClick={handleChoice}>{decodeURIComponent(answ)}</Button>
+      <Button variant={(decodeURIComponent(answ.toLowerCase())===chosenAnswer.toLowerCase())?"outlined":"text"} style = {{fontSize:'1em'}}  key={i} onClick={handleChoice}>{decodeURIComponent(answ)}</Button>
     </div>)
   }
 
@@ -110,12 +110,15 @@ const QuizInProgress = () => {
       <h2> </h2>
       {(index<questions.length) ? <Question index={index} />: <></>}
 
-      <div>
+      <div >
 
         
         {options}
-        <CircularProgress size = {300} variant = "determinate" color = {(percent>30) ? "success": "error"} value = {percent} style = {{transition: 'none'}}/>
+        <div style = {{marginTop: '25px'}}>
+        <CircularProgress size = {250} variant = "determinate" color = {(percent>30) ? "success": "error"} value = {percent} style = {{transition: 'none'}}/>
+        </div>
       </div>
+
 
 
 

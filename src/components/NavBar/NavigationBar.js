@@ -9,12 +9,14 @@ const NavigationBar = () => {
     return (
             <Navbar bg="primary" variant="dark">
                 <Container>
-                    <Navbar.Brand href="/">
-                        <QuizIcon/>
-                    </Navbar.Brand>
-                    <Navbar.Brand href="/">
-                        Quizio
-                    </Navbar.Brand>
+                    <div style={{textAlign:'left'}}>
+                        <Navbar.Brand href="/">
+                            <QuizIcon/>
+                        </Navbar.Brand>
+                        <Navbar.Brand href="/">
+                            Quizio
+                        </Navbar.Brand>
+                    </div>
                     <Nav >
                         <Nav.Link href="/">Home</Nav.Link>
                         {!currentUser && <Nav.Link href="/register">Register</Nav.Link>}
